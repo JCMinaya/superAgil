@@ -1,5 +1,5 @@
 package superAgil;
 
 public enum CajasEstados {
-	Ocupada, Disponible, Facturando, Cerrada
+	Ocupada, Disponible, RecibiendoCliente, Facturando, Cerrada
 }
