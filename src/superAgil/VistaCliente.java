@@ -54,5 +54,9 @@ public class VistaCliente extends JFrame  {
 		contentPane.add(centerPane);
 		//
 		pack();
-	}	
+	}
+	public  void open() {
+		setVisible(true);
+	}
+
 }
