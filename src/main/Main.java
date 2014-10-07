@@ -9,14 +9,9 @@ public class Main {
 	@SuppressWarnings("deprecation")
 	
 	public void run() {
-		SuperController ctrl = new SuperController();
-		VistaCliente view = new VistaCliente();
-		view.show();
+		VistaCliente view = new VistaCliente(3);
+		view.setVisible(true);
 		
-		ctrl.startCajas();
-		ctrl.queueClient(new Cliente(6));
-		ctrl.queueClient(new Cliente(4));
-		ctrl.queueClient(new Cliente(9));
 	}
 	
 	public static void main(String[] args) {

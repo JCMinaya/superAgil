@@ -14,8 +14,8 @@ public class Cliente {
 	}
 
 	public int getArticulo() {
-		// TODO Auto-generated method stub
-		return 0;
+		cantArticulos--;
+		return 1;
 	}
 
 

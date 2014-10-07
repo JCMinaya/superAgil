@@ -1,6 +1,7 @@
 package superAgil;
 
 import java.util.EmptyStackException;
+import java.util.Random;
 
 import cliente.Cliente;
 
@@ -39,32 +40,40 @@ public class Caja implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
-		while ( _estado == CajasEstados.Disponible ) {
-			try {
-				clienteActual = ctrl.cola.pop();
-				
-				if ( clienteActual != null )
-					_estado = CajasEstados.Ocupada;
-				
-			} catch( EmptyStackException e ) {
+		while (true) {
+			while ( _estado == CajasEstados.Disponible ) {
+				try {
+					clienteActual = ctrl.colaPop();
+					
+					if ( clienteActual != null )
+						setEstado (CajasEstados.Ocupada);
+					
+				} catch( EmptyStackException e ) {
+				}
 			}
+			atiendeCliente();
 		}
-		atiendeCliente();
-		run();
 	}
 	
 	private synchronized void atiendeCliente() {
 		if ( clienteActual != null ) {
 			try {
-				wait(clienteActual.countArticulos() * ( 1000 ));
+				while (clienteActual.countArticulos() > 0) {
+					wait(clienteActual.getArticulo() * (900 + new Random().nextInt(3000)));
+					setEstado(null);
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		_estado = CajasEstados.Disponible;
+		setEstado (CajasEstados.Disponible);
 		System.out.println(this.toString() + " termino con un cliente");
+	}
+	
+	private void setEstado (CajasEstados estado) {
+		if (estado != null) _estado = estado;
+		ctrl.updateCaja(this);
 	}
 	
 }
