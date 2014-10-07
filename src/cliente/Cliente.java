@@ -1,31 +1,22 @@
 package cliente;
 
-public class Cliente implements superAgil.Cliente {
-	float tiempodePago;
+public class Cliente {
 	
-	@Override
+	int cantArticulos;
+	
+	public Cliente(int cantArticulos) {
+		this.cantArticulos = cantArticulos;
+	}
+	
 	public int countArticulos() {
 		// TODO Auto-generated method stub
-		return 0;
+		return cantArticulos;
 	}
 
-	@Override
 	public int getArticulo() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public boolean recibirPago() {
-		// TODO Auto-generated method stub
-		if (tiempodePago == 0.0f) tiempodePago = 5;
-		try {
-			wait ((int)(tiempodePago * 1000));
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			
-		}
-		return true;
-	}
-	
+
 }
